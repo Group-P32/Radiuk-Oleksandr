@@ -1,0 +1,20 @@
+﻿@model FirstAppRadiuk.Models.Product
+
+@{
+    ViewBag.Title = "Додати продукт";
+}
+
+<h2>Додати продукт</h2>
+
+@using (Html.BeginForm())
+{
+    <p>Назва: @Html.TextBoxFor(m => m.Name)</p>
+    <p>Категорія: @Html.TextBoxFor(m => m.Category)</p>
+    <p>Виробник: @Html.TextBoxFor(m => m.Manufacturer)</p>
+    <p>Вага/Об'єм: @Html.TextBoxFor(m => m.Weight)</p>
+    <p>Ціна: @Html.TextBoxFor(m => m.Price)</p>
+    <p>К-сть на складі: @Html.TextBoxFor(m => m.Quantity)</p>
+    <p><input type="submit" value="Зберегти" /></p>
+}
+
+<p>@Html.ActionLink("Назад до списку", "Index")</p>
