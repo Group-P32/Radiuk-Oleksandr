@@ -37,6 +37,7 @@
                 <td>@item.Price</td>
                 <td>@item.Quantity</td>
                 <td>
+                    <a href="/Products/Buy/@item.Id">Купити</a>
                     @using (Html.BeginForm("Delete", "Products", new { id = item.Id }, FormMethod.Post))
                     {
                         <input type="submit" value="Видалити" />

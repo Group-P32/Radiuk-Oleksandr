@@ -1,0 +1,29 @@
+﻿@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Оформлення покупки</title>
+</head>
+<body>
+    <h3>Форма оформлення покупки</h3>
+    <form method="post">
+        <input type="hidden" value="@ViewBag.ProductId" name="ProductId" />
+        <table>
+            <tr>
+                <td>Введіть своє ім'я:</td>
+                <td><input type="text" name="Person" /></td>
+            </tr>
+            <tr>
+                <td>Введіть свою адресу:</td>
+                <td><input type="text" name="Address" /></td>
+            </tr>
+            <tr>
+                <td><input type="submit" value="Відправити" /></td>
+            </tr>
+        </table>
+    </form>
+    <p><a href="/Products">Назад до списку</a></p>
+</body>
+</html>

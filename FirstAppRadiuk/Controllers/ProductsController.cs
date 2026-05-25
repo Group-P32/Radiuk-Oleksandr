@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using System;
 using System.Web.Mvc;
 using FirstAppRadiuk.Models;
 
@@ -48,6 +49,22 @@ namespace FirstAppRadiuk.Controllers
             db.Products.Remove(product);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+        [HttpGet]
+        public ActionResult Buy(int? id)
+        {
+            if (id == null) return HttpNotFound();
+            ViewBag.ProductId = id;
+            return View();
+        }
+
+        [HttpPost]
+        public string Buy(Purchase purchase)
+        {
+            purchase.Date = DateTime.Now;
+            db.Purchases.Add(purchase);
+            db.SaveChanges();
+            return "Дякуємо, " + purchase.Person + ", за покупку!";
         }
     }
 }
