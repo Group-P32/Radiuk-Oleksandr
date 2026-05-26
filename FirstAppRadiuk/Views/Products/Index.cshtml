@@ -1,6 +1,4 @@
-﻿@* Якщо файл відкриється умовно на /Products/Buy, то прошу перейти на  localhost:55627/Products *@
-
-@model IEnumerable<FirstAppRadiuk.Models.Product>
+﻿@model IEnumerable<FirstAppRadiuk.Models.Product>
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Магазин продуктів";
@@ -18,7 +16,7 @@
         <col style="width:10%" />
         <col style="width:10%" />
         <col style="width:12%" />
-        <col style="width:16%" />
+        <col style="width:18%" />
     </colgroup>
     <tr>
         <th>Назва</th>
@@ -38,13 +36,15 @@
             <td>@item.Weight</td>
             <td>@item.Price</td>
             <td>@item.Quantity</td>
-            <td style="white-space: nowrap;">
-                <a href="/Products/Buy/@item.Id">Купити</a>
-                &nbsp;
-                @using (Html.BeginForm("Delete", "Products", new { id = item.Id }, FormMethod.Post))
-                {
-                    <input type="submit" value="Видалити" />
-                }
+            <td>
+                <div style="display:flex; flex-direction:column; gap:4px;">
+                    <a href="/Products/Edit/@item.Id" class="btn-edit">Редагувати</a>
+                    <a href="/Products/Buy/@item.Id" class="btn-buy">Купити</a>
+                    @using (Html.BeginForm("Delete", "Products", new { id = item.Id }, FormMethod.Post))
+                    {
+                        <input type="submit" value="Видалити" class="btn-delete" />
+                    }
+                </div>
             </td>
         </tr>
     }
