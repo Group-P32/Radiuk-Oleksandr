@@ -31,13 +31,13 @@
     {
         <tr>
             <td>@item.Name</td>
-            <td>@item.Category</td>
+            <td>@(item.CategoryNav != null ? item.CategoryNav.Name : "—")</td>
             <td>@item.Manufacturer</td>
             <td>@item.Weight</td>
             <td>@item.Price</td>
             <td>@item.Quantity</td>
             <td>
-                <div style="display:flex; flex-direction:column; gap:4px;">
+                <div style="display:flex; flex-direction:column; gap:4px; width:90px;">
                     <a href="/Products/Edit/@item.Id" class="btn-edit">Редагувати</a>
                     <a href="/Products/Buy/@item.Id" class="btn-buy">Купити</a>
                     @using (Html.BeginForm("Delete", "Products", new { id = item.Id }, FormMethod.Post))

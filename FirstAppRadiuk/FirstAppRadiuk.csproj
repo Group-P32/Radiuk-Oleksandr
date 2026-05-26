@@ -127,6 +127,7 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\CategoriesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProductsController.cs" />
     <Compile Include="Global.asax.cs">
@@ -140,7 +141,12 @@
     <Compile Include="Migrations\202605251237379_AddPurchases.designer.cs">
       <DependentUpon>202605251237379_AddPurchases.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202605261508085_AddCategories.cs" />
+    <Compile Include="Migrations\202605261508085_AddCategories.designer.cs">
+      <DependentUpon>202605261508085_AddCategories.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\GroceryContext.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\Product.cs" />
@@ -189,6 +195,10 @@
     <Content Include="Views\Products\Buy.cshtml" />
     <Content Include="Views\Products\_Layout.cshtml" />
     <Content Include="Views\Products\Edit.cshtml" />
+    <Content Include="Views\Categories\Index.cshtml" />
+    <Content Include="Views\Categories\Create.cshtml" />
+    <Content Include="Views\Categories\Details.cshtml" />
+    <Content Include="Views\Categories\Delete.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -212,6 +222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202605251237379_AddPurchases.resx">
       <DependentUpon>202605251237379_AddPurchases.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202605261508085_AddCategories.resx">
+      <DependentUpon>202605261508085_AddCategories.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

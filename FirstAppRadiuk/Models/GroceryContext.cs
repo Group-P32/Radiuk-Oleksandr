@@ -10,5 +10,6 @@ namespace FirstAppRadiuk.Models
         // Таблиця замовлень
         public DbSet<Order> Orders { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<Category> Categories { get; set; }
     }
 }

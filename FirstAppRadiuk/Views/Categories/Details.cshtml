@@ -1,0 +1,17 @@
+﻿@model FirstAppRadiuk.Models.Category
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Деталі категорії";
+}
+<div style="margin: 20px;">
+    <h2>Категорія: @Model.Name</h2>
+    <p>Опис: @Model.Description</p>
+    <h3>Продукти в цій категорії:</h3>
+    <ul>
+        @foreach (var p in Model.Products)
+        {
+            <li>@p.Name — @p.Price грн</li>
+        }
+    </ul>
+    <p><a href="/Categories">Назад до списку</a></p>
+</div>

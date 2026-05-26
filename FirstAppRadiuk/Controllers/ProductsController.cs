@@ -19,6 +19,7 @@ namespace FirstAppRadiuk.Controllers
         // Форма додавання — GET
         public ActionResult Create()
         {
+            ViewBag.Categories = new SelectList(db.Categories, "Id", "Name");
             return View();
         }
 
@@ -79,6 +80,7 @@ namespace FirstAppRadiuk.Controllers
             {
                 return HttpNotFound();
             }
+            ViewBag.Categories = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
             return View(product);
         }
 

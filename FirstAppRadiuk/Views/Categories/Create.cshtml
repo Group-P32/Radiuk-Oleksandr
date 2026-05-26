@@ -1,0 +1,15 @@
+﻿@model FirstAppRadiuk.Models.Category
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Додати категорію";
+}
+<div style="margin: 20px;">
+    <h2>Додати категорію</h2>
+    @using (Html.BeginForm())
+    {
+        <p>Назва: @Html.TextBoxFor(m => m.Name)</p>
+        <p>Опис: @Html.TextBoxFor(m => m.Description)</p>
+        <p><input type="submit" value="Зберегти" /></p>
+    }
+    <p><a href="/Categories">Назад до списку</a></p>
+</div>

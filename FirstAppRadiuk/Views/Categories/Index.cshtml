@@ -1,0 +1,29 @@
+﻿@model IEnumerable<FirstAppRadiuk.Models.Category>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Категорії";
+}
+<h2>Список категорій</h2>
+<p style="margin: 15px 20px;">@Html.ActionLink("Додати категорію", "Create")</p>
+<table border="1" cellpadding="5" cellspacing="0" style="width:100%;">
+    <tr>
+        <th>Назва</th>
+        <th>Опис</th>
+        <th>Дії</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.Name</td>
+            <td>@item.Description</td>
+            <td>
+                <a href="/Categories/Details/@item.Id">Деталі</a>
+                &nbsp;
+                @using (Html.BeginForm("Delete", "Categories", new { id = item.Id }, FormMethod.Post))
+                {
+                    <input type="submit" value="Видалити" />
+                }
+            </td>
+        </tr>
+    }
+</table>

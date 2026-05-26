@@ -1,19 +1,16 @@
-﻿@* Якщо файл відкриється умовно на /Products/Buy, то прошу перейти на  localhost:55627/Products *@
-@model FirstAppRadiuk.Models.Product
-
+﻿@model FirstAppRadiuk.Models.Product
 @{
+    Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Видалити продукт";
 }
-
-<h2>Видалити продукт?</h2>
-
-<p>Назва: @Model.Name</p>
-<p>Категорія: @Model.Category</p>
-<p>Ціна: @Model.Price грн</p>
-
-@using (Html.BeginForm())
-{
-    <input type="submit" value="Підтвердити видалення" />
-}
-
-<p>@Html.ActionLink("Скасувати", "Index")</p>
+<div style="margin: 20px;">
+    <h2>Видалити продукт?</h2>
+    <p>Назва: @Model.Name</p>
+    <p>Виробник: @Model.Manufacturer</p>
+    <p>Ціна: @Model.Price грн</p>
+    @using (Html.BeginForm())
+    {
+        <input type="submit" value="Підтвердити видалення" />
+    }
+    <p><a href="/Products">Скасувати</a></p>
+</div>

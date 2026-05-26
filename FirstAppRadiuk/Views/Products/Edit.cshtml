@@ -3,48 +3,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Редагувати продукт";
 }
-
 <div style="margin: 20px;">
     <h2>Редагувати продукт</h2>
-
     @using (Html.BeginForm())
     {
         @Html.HiddenFor(m => m.Id)
-
-        <p>
-            @Html.LabelFor(m => m.Name, "Назва")
-            <br />
-            @Html.EditorFor(m => m.Name)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Category, "Категорія")
-            <br />
-            @Html.EditorFor(m => m.Category)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Manufacturer, "Виробник")
-            <br />
-            @Html.EditorFor(m => m.Manufacturer)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Weight, "Вага/Об'єм")
-            <br />
-            @Html.EditorFor(m => m.Weight)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Price, "Ціна (грн)")
-            <br />
-            @Html.EditorFor(m => m.Price)
-        </p>
-        <p>
-            @Html.LabelFor(m => m.Quantity, "К-сть на складі")
-            <br />
-            @Html.EditorFor(m => m.Quantity)
-        </p>
-        <p>
-            <input type="submit" value="Зберегти" />
-        </p>
+        <p>Назва: @Html.EditorFor(m => m.Name)</p>
+        <p>Виробник: @Html.EditorFor(m => m.Manufacturer)</p>
+        <p>Вага/Об'єм: @Html.EditorFor(m => m.Weight)</p>
+        <p>Ціна: @Html.EditorFor(m => m.Price)</p>
+        <p>К-сть на складі: @Html.EditorFor(m => m.Quantity)</p>
+        <p>Категорія: @Html.DropDownListFor(m => m.CategoryId, ViewBag.Categories as SelectList, "-- Без категорії --")</p>
+        <p><input type="submit" value="Зберегти" /></p>
     }
-
     <p><a href="/Products">Назад до списку</a></p>
 </div>

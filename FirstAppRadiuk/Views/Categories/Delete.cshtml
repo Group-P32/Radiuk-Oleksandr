@@ -1,0 +1,14 @@
+﻿@model FirstAppRadiuk.Models.Category
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Видалити категорію";
+}
+<div style="margin: 20px;">
+    <h2>Видалити категорію?</h2>
+    <p>Назва: @Model.Name</p>
+    @using (Html.BeginForm())
+    {
+        <input type="submit" value="Підтвердити видалення" />
+    }
+    <p><a href="/Categories">Скасувати</a></p>
+</div>
