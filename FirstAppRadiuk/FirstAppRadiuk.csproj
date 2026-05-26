@@ -187,6 +187,7 @@
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Buy.cshtml" />
+    <Content Include="Views\Products\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

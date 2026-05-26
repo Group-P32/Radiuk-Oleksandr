@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿//Якщо файл відкриється умовно на /Products/Buy, то прошу перейти на  localhost:55627/Products 
+using System.Data.Entity;
 
 namespace FirstAppRadiuk.Models
 {

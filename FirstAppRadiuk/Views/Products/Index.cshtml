@@ -1,48 +1,51 @@
-﻿@model IEnumerable<FirstAppRadiuk.Models.Product>
+﻿@* Якщо файл відкриється умовно на /Products/Buy, то прошу перейти на  localhost:55627/Products *@
 
-    @{
-    ViewBag.Title = "Продуктовий магазин";
-    }
+@model IEnumerable<FirstAppRadiuk.Models.Product>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Магазин продуктів";
+}
 
-    <h2>Список продуктів</h2>
+<h2>Список продуктів</h2>
 
-    <p>@Html.ActionLink("Додати продукт", "Create")</p>
+<p style="margin: 15px 20px;">@Html.ActionLink("Додати продукт", "Create")</p>
 
-    <table border="1" cellpadding="5" cellspacing="0" style="width:100%; table-layout:fixed;">
-        <colgroup>
-            <col style="width:15%" />
-            <col style="width:12%" />
-            <col style="width:13%" />
-            <col style="width:10%" />
-            <col style="width:10%" />
-            <col style="width:12%" />
-            <col style="width:8%" />
-        </colgroup>
+<table border="1" cellpadding="5" cellspacing="0" style="width:100%; table-layout:fixed;">
+    <colgroup>
+        <col style="width:15%" />
+        <col style="width:12%" />
+        <col style="width:13%" />
+        <col style="width:10%" />
+        <col style="width:10%" />
+        <col style="width:12%" />
+        <col style="width:16%" />
+    </colgroup>
+    <tr>
+        <th>Назва</th>
+        <th>Категорія</th>
+        <th>Виробник</th>
+        <th>Вага/Об'єм</th>
+        <th>Ціна (грн)</th>
+        <th>К-сть на складі</th>
+        <th>Дії</th>
+    </tr>
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>Назва</th>
-            <th>Категорія</th>
-            <th>Виробник</th>
-            <th>Вага/Об'єм</th>
-            <th>Ціна (грн)</th>
-            <th>К-сть на складі</th>
-            <th>Дії</th>
+            <td>@item.Name</td>
+            <td>@item.Category</td>
+            <td>@item.Manufacturer</td>
+            <td>@item.Weight</td>
+            <td>@item.Price</td>
+            <td>@item.Quantity</td>
+            <td style="white-space: nowrap;">
+                <a href="/Products/Buy/@item.Id">Купити</a>
+                &nbsp;
+                @using (Html.BeginForm("Delete", "Products", new { id = item.Id }, FormMethod.Post))
+                {
+                    <input type="submit" value="Видалити" />
+                }
+            </td>
         </tr>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.Category</td>
-                <td>@item.Manufacturer</td>
-                <td>@item.Weight</td>
-                <td>@item.Price</td>
-                <td>@item.Quantity</td>
-                <td>
-                    <a href="/Products/Buy/@item.Id">Купити</a>
-                    @using (Html.BeginForm("Delete", "Products", new { id = item.Id }, FormMethod.Post))
-                    {
-                        <input type="submit" value="Видалити" />
-                    }
-                </td>
-            </tr>
-        }
-    </table>
+    }
+</table>

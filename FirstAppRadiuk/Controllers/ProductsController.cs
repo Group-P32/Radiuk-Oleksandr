@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿//Якщо файл відкриється умовно на /Products/Buy, то прошу перейти на  localhost:55627/Products 
+using System.Linq;
 using System;
 using System.Web.Mvc;
 using FirstAppRadiuk.Models;

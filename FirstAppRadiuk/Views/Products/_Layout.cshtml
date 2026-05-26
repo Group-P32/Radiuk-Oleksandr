@@ -1,0 +1,16 @@
+﻿@* Якщо файл відкриється умовно на /Products/Buy, то прошу перейти на  localhost:55627/Products *@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="navbar">
+        @Html.ActionLink("Магазин продуктів", "Index", "Products")
+        @Html.ActionLink("Головна", "Index", "Home")
+    </div>
+    @RenderBody()
+</body>
+</html>

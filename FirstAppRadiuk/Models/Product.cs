@@ -1,4 +1,5 @@
-﻿namespace FirstAppRadiuk.Models
+﻿//Якщо файл відкриється умовно на /Products/Buy, то прошу перейти на  localhost:55627/Products 
+namespace FirstAppRadiuk.Models
 {
     public class Product
     {

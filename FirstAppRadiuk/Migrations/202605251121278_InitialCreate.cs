@@ -1,4 +1,5 @@
-﻿namespace FirstAppRadiuk.Migrations
+﻿//Якщо файл відкриється умовно на /Products/Buy, то прошу перейти на  localhost:55627/Products 
+namespace FirstAppRadiuk.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

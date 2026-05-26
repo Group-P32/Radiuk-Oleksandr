@@ -1,9 +1,13 @@
-﻿@model FirstAppRadiuk.Models.Product
+﻿@* Якщо файл відкриється умовно на /Products/Buy, то прошу перейти на  localhost:55627/Products *@
+@model FirstAppRadiuk.Models.Product
 
 @{
     ViewBag.Title = "Додати продукт";
 }
-
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Додати продукт";
+}
 <h2>Додати продукт</h2>
 
 @using (Html.BeginForm())
