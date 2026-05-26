@@ -1,12 +1,21 @@
-﻿@model IEnumerable<FirstAppRadiuk.Models.Product>
+﻿@model FirstAppRadiuk.Models.ProductsListViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Магазин продуктів";
 }
 
 <h2>Список продуктів</h2>
+<p style="margin: 15px 20px;"><a href="/Products/Create" class="btn-edit">Додати продукт</a></p>
 
-<p style="margin: 15px 20px;">@Html.ActionLink("Додати продукт", "Create")</p>
+<form method="get" style="margin: 0 20px 15px 20px;">
+    <label>Категорія:</label>
+    @Html.DropDownList("category", Model.Categories as SelectList)
+    &nbsp;
+    <label>Виробник:</label>
+    @Html.DropDownList("manufacturer", Model.Manufacturers as SelectList)
+    &nbsp;
+    <input type="submit" value="Фільтр" />
+</form>
 
 <table border="1" cellpadding="5" cellspacing="0" style="width:100%; table-layout:fixed;">
     <colgroup>
@@ -27,7 +36,7 @@
         <th>К-сть на складі</th>
         <th>Дії</th>
     </tr>
-    @foreach (var item in Model)
+    @foreach (var item in Model.Products)
     {
         <tr>
             <td>@item.Name</td>
