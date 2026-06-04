@@ -1,21 +1,17 @@
 ﻿@model FirstAppRadiuk.Models.ProductsListViewModel
-@using FirstAppRadiuk.Helpers
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Магазин продуктів";
+    ViewBag.Title = Resources.Resource.ProductList;
 }
 
-<h2>Список продуктів</h2>
-<p style="margin: 15px 20px;">
-    <a href="/Products/Create" class="btn-edit">Додати продукт</a>
-</p>
+<h2>@Resources.Resource.ProductList</h2>
+<p style="margin: 15px 20px;"><a href="/Products/Create" class="btn-edit">@Resources.Resource.AddProduct</a></p>
 
-@* Форма фільтрації — при натисканні кнопки сторінок фільтри зберігаються *@
 <form method="get" style="margin: 0 20px 15px 20px;">
-    <label>Категорія:</label>
+    <label>@Resources.Resource.Category:</label>
     @Html.DropDownList("category", Model.Categories as SelectList)
     &nbsp;
-    <label>Виробник:</label>
+    <label>@Resources.Resource.Manufacturer:</label>
     @Html.DropDownList("manufacturer", Model.Manufacturers as SelectList)
     &nbsp;
     <input type="submit" value="Фільтр" />
@@ -32,13 +28,13 @@
         <col style="width:18%" />
     </colgroup>
     <tr>
-        <th>Назва</th>
-        <th>Категорія</th>
-        <th>Виробник</th>
-        <th>Вага/Об'єм</th>
-        <th>Ціна (грн)</th>
-        <th>К-сть на складі</th>
-        <th>Дії</th>
+        <th>@Resources.Resource.Name</th>
+        <th>@Resources.Resource.Category</th>
+        <th>@Resources.Resource.Manufacturer</th>
+        <th>@Resources.Resource.Weight</th>
+        <th>@Resources.Resource.Price</th>
+        <th>@Resources.Resource.Quantity</th>
+        <th>@Resources.Resource.Actions</th>
     </tr>
     @foreach (var item in Model.Products)
     {
@@ -51,24 +47,14 @@
             <td>@item.Quantity</td>
             <td>
                 <div style="display:flex; flex-direction:column; gap:4px; width:90px;">
-                    <a href="/Products/Edit/@item.Id" class="btn-edit">Редагувати</a>
-                    <a href="/Products/Buy/@item.Id" class="btn-buy">Купити</a>
+                    <a href="/Products/Edit/@item.Id" class="btn-edit">@Resources.Resource.Edit</a>
+                    <a href="/Products/Buy/@item.Id" class="btn-buy">@Resources.Resource.Buy</a>
                     @using (Html.BeginForm("Delete", "Products", new { id = item.Id }, FormMethod.Post))
                     {
-                        <input type="submit" value="Видалити" class="btn-delete" />
+                        <input type="submit" value="@Resources.Resource.Delete" class="btn-delete" />
                     }
                 </div>
             </td>
         </tr>
     }
 </table>
-
-@* Кнопки пагінації — передаємо фільтри щоб не скидались при переході між сторінками *@
-<div style="margin: 15px 20px;">
-    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new
-    {
-        page = x,
-        category = Model.SelectedCategory,
-        manufacturer = Model.SelectedManufacturer
-    }))
-</div>

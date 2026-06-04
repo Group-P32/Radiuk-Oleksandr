@@ -8,6 +8,17 @@
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
+    <div style="background-color:#1a252f; padding:5px; text-align:right;">
+        @using (Html.BeginForm("ChangeCulture", "Products"))
+        {
+            <select name="lang" style="padding:3px;">
+                <option disabled selected>@Resources.Resource.ChooseLang</option>
+                <option value="uk">Українська</option>
+                <option value="en">English</option>
+            </select>
+            <input type="submit" value="OK" style="padding:3px 8px;" />
+        }
+    </div>
     <header id="header">
         <h1>Продуктовий магазин</h1>
     </header>
