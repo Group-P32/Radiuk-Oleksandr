@@ -1,0 +1,27 @@
+﻿@model FirstAppRadiuk.Models.LoginModel
+@{
+    ViewBag.Title = "Вхід";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Авторизація користувача</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div>
+        @Html.ValidationSummary()
+        <input type="hidden" name="returnUrl" value="@ViewBag.returnUrl" />
+        <p>
+            <label>Email</label>
+            @Html.EditorFor(x => x.Email)
+        </p>
+        <p>
+            <label>Пароль</label>
+            @Html.EditorFor(x => x.Password)
+        </p>
+        <p>
+            <button class="btn-buy" type="submit">Увійти</button>
+        </p>
+    </div>
+}

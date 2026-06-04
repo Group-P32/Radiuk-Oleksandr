@@ -1,5 +1,4 @@
 ﻿@* Майстер-сторінка - спільний шаблон для всіх сторінок сайту *@
-@* Містить: header, navbar, aside з новинами, footer *@
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,21 +7,34 @@
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div style="background-color:#1a252f; padding:5px; text-align:right;">
-        @using (Html.BeginForm("ChangeCulture", "Products"))
-        {
-            <select name="lang" style="padding:3px;">
-                <option disabled selected>@Resources.Resource.ChooseLang</option>
-                <option value="uk">Українська</option>
-                <option value="en">English</option>
-            </select>
-            <input type="submit" value="OK" style="padding:3px 8px;" />
-        }
+    <div id="top-bar">
+        <div id="auth-links">
+            @if (Request.IsAuthenticated)
+            {
+                <span id="user-name">@User.Identity.Name</span>
+                @Html.ActionLink("Вийти", "Logout", "Account", null, new { @class = "btn-auth" })
+            }
+            else
+            {
+                @Html.ActionLink("Вхід", "Login", "Account", null, new { @class = "btn-auth" })
+                @Html.ActionLink("Реєстрація", "Register", "Account", null, new { @class = "btn-auth" })
+            }
+        </div>
+        <div id="lang-form">
+            @using (Html.BeginForm("ChangeCulture", "Products"))
+            {
+                <select name="lang">
+                    <option disabled selected>@Resources.Resource.ChooseLang</option>
+                    <option value="uk">Українська</option>
+                    <option value="en">English</option>
+                </select>
+                <input type="submit" value="OK" />
+            }
+        </div>
     </div>
     <header id="header">
         <h1>Продуктовий магазин</h1>
     </header>
-
     <nav id="nav">
         <ul>
             <li>@Html.ActionLink("Магазин продуктів", "Index", "Products")</li>
@@ -30,7 +42,6 @@
             <li>@Html.ActionLink("Головна", "Index", "Home")</li>
         </ul>
     </nav>
-
     <div id="main-wrapper">
         <aside id="side">
             <h2>Розділи</h2>
@@ -39,12 +50,10 @@
             <a href="/Products/Create">Додати продукт</a>
             <a href="/Categories/Create">Додати категорію</a>
         </aside>
-
         <div id="con">
             @RenderBody()
         </div>
     </div>
-
     <footer id="footer">
         &copy; @DateTime.Now.Year - Продуктовий магазин Радюк Олександр
     </footer>
