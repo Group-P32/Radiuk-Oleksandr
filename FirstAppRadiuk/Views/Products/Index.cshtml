@@ -1,12 +1,16 @@
 ﻿@model FirstAppRadiuk.Models.ProductsListViewModel
+@using FirstAppRadiuk.Helpers
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "Магазин продуктів";
 }
 
 <h2>Список продуктів</h2>
-<p style="margin: 15px 20px;"><a href="/Products/Create" class="btn-edit">Додати продукт</a></p>
+<p style="margin: 15px 20px;">
+    <a href="/Products/Create" class="btn-edit">Додати продукт</a>
+</p>
 
+@* Форма фільтрації — при натисканні кнопки сторінок фільтри зберігаються *@
 <form method="get" style="margin: 0 20px 15px 20px;">
     <label>Категорія:</label>
     @Html.DropDownList("category", Model.Categories as SelectList)
@@ -58,3 +62,13 @@
         </tr>
     }
 </table>
+
+@* Кнопки пагінації — передаємо фільтри щоб не скидались при переході між сторінками *@
+<div style="margin: 15px 20px;">
+    @Html.PageLinks(Model.PageInfo, x => Url.Action("Index", new
+    {
+        page = x,
+        category = Model.SelectedCategory,
+        manufacturer = Model.SelectedManufacturer
+    }))
+</div>

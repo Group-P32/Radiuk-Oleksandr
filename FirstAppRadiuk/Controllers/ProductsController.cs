@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
 using FirstAppRadiuk.Models;
+using FirstAppRadiuk.Helpers;
 
 namespace FirstAppRadiuk.Controllers
 {
@@ -11,48 +12,68 @@ namespace FirstAppRadiuk.Controllers
     {
         private GroceryContext db = new GroceryContext();
 
-        // Список продуктів з фільтрацією
-        // category - ID категорії для фільтру (0 або null = всі)
-        // manufacturer - назва виробника для фільтру ("Всі" = всі)
-        public ActionResult Index(int? category, string manufacturer)
+        // Список продуктів з фільтрацією та пагінацією
+        // page - номер сторінки (за замовчуванням 1)
+        // category - ID категорії для фільтру
+        // manufacturer - виробник для фільтру
+        public ActionResult Index(int page = 1, int? category = null, string manufacturer = null)
         {
-            // Отримуємо всі продукти з бази даних
+            int pageSize = 3; // кількість продуктів на одній сторінці
+
+            // Отримуємо всі продукти з бази
             IQueryable<Product> products = db.Products;
 
-            // Фільтр по категорії - якщо вибрано конкретну категорію
+            // Фільтр по категорії
             if (category != null && category != 0)
             {
                 products = products.Where(p => p.CategoryId == category);
             }
-
-            // Фільтр по виробнику - якщо вибрано конкретного виробника
+            // Фільтр по виробнику
             if (!String.IsNullOrEmpty(manufacturer) && !manufacturer.Equals("Всі"))
             {
                 products = products.Where(p => p.Manufacturer == manufacturer);
             }
 
-            // Отримуємо список категорій і додаємо пункт "Всі" на початок
+            // Рахуємо скільки всього продуктів після фільтру
+            int totalItems = products.Count();
+
+            // Беремо тільки продукти для поточної сторінки
+            List<Product> productsPerPage = products
+                .OrderBy(p => p.Id)
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToList();
+
+            // Список категорій для фільтру
             List<Category> categories = db.Categories.ToList();
             categories.Insert(0, new Category { Name = "Всі", Id = 0 });
 
-            // Отримуємо унікальних виробників і додаємо "Всі" на початок
+            // Список виробників для фільтру (унікальні)
             List<string> manufacturers = db.Products
                 .Select(p => p.Manufacturer)
                 .Distinct()
                 .ToList();
             manufacturers.Insert(0, "Всі");
 
-            // Формуємо ViewModel з продуктами і списками для фільтрів
+            // Формуємо ViewModel з усіма даними
             ProductsListViewModel viewModel = new ProductsListViewModel
             {
-                Products = products.ToList(),
+                Products = productsPerPage,
                 Categories = new SelectList(categories, "Id", "Name"),
-                Manufacturers = new SelectList(manufacturers)
+                Manufacturers = new SelectList(manufacturers),
+                PageInfo = new PageInfo
+                {
+                    PageNumber = page,
+                    PageSize = pageSize,
+                    TotalItems = totalItems
+                },
+                // Зберігаємо фільтри щоб кнопки пагінації їх не скидали
+                SelectedCategory = category,
+                SelectedManufacturer = manufacturer
             };
 
             return View(viewModel);
         }
-
 
         // Форма додавання — GET
         public ActionResult Create()
@@ -90,6 +111,7 @@ namespace FirstAppRadiuk.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
         [HttpGet]
         public ActionResult Buy(int? id)
         {
@@ -106,18 +128,13 @@ namespace FirstAppRadiuk.Controllers
             db.SaveChanges();
             return "Дякуємо, " + purchase.Person + ", за покупку!";
         }
+
         // Редагування - GET
         public ActionResult Edit(int? id)
         {
-            if (id == null)
-            {
-                return HttpNotFound();
-            }
+            if (id == null) return HttpNotFound();
             Product product = db.Products.Find(id);
-            if (product == null)
-            {
-                return HttpNotFound();
-            }
+            if (product == null) return HttpNotFound();
             ViewBag.Categories = new SelectList(db.Categories, "Id", "Name", product.CategoryId);
             return View(product);
         }
