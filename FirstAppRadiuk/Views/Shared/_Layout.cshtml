@@ -1,5 +1,5 @@
-﻿@* Навігація: Магазин продуктів - список продуктів, Категорії - список категорій *@
-@* Щоб додати категорію: натисни "Категорії" -> "Додати категорію" *@
+﻿@* Майстер-сторінка - спільний шаблон для всіх сторінок сайту *@
+@* Містить: header, navbar, aside з новинами, footer *@
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,11 +8,34 @@
     <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
 </head>
 <body>
-    <div class="navbar">
-        @Html.ActionLink("Магазин продуктів", "Index", "Products")
-        @Html.ActionLink("Категорії", "Index", "Categories")
-        @Html.ActionLink("Головна", "Index", "Home")
+    <header id="header">
+        <h1>Продуктовий магазин</h1>
+    </header>
+
+    <nav id="nav">
+        <ul>
+            <li>@Html.ActionLink("Магазин продуктів", "Index", "Products")</li>
+            <li>@Html.ActionLink("Категорії", "Index", "Categories")</li>
+            <li>@Html.ActionLink("Головна", "Index", "Home")</li>
+        </ul>
+    </nav>
+
+    <div id="main-wrapper">
+        <aside id="side">
+            <h2>Розділи</h2>
+            <a href="/Products">Всі продукти</a>
+            <a href="/Categories">Категорії</a>
+            <a href="/Products/Create">Додати продукт</a>
+            <a href="/Categories/Create">Додати категорію</a>
+        </aside>
+
+        <div id="con">
+            @RenderBody()
+        </div>
     </div>
-    @RenderBody()
+
+    <footer id="footer">
+        &copy; @DateTime.Now.Year - Продуктовий магазин Радюк Олександр
+    </footer>
 </body>
 </html>
