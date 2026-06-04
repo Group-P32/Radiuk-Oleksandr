@@ -139,5 +139,14 @@ namespace FirstAppRadiuk.Controllers
             Response.Cookies.Add(cookie);
             return Redirect(returnUrl);
         }
+        // AJAX пошук продуктів за назвою
+        [HttpPost]
+        public ActionResult ProductSearch(string name)
+        {
+            var results = db.Products.Where(p => p.Name.Contains(name)).ToList();
+            if (results.Count <= 0)
+                return HttpNotFound();
+            return PartialView(results);
+        }
     }
 }

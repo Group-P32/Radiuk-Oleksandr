@@ -1,0 +1,21 @@
+﻿@model IEnumerable<FirstAppRadiuk.Models.Product>
+<div id="searchresults">
+    <h3>Результати пошуку: @Model.First().Name</h3>
+    <table border="1" cellpadding="5" style="width:100%;">
+        <tr>
+            <th>Назва</th>
+            <th>Виробник</th>
+            <th>Ціна (грн)</th>
+            <th>К-сть на складі</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.Name</td>
+                <td>@item.Manufacturer</td>
+                <td>@item.Price</td>
+                <td>@item.Quantity</td>
+            </tr>
+        }
+    </table>
+</div>
