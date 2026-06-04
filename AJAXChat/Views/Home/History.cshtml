@@ -1,0 +1,29 @@
+﻿
+@using AJAXChat.Models
+@model ChatModel
+
+<div id="Users">
+    <p><strong>В чаті онлайн: @Model.Users.Count</strong></p>
+    @foreach (ChatUser user in Model.Users)
+    {
+        <p class="user-item">👤 @user.Name</p>
+    }
+</div>
+
+<div id="Messages">
+    @foreach (ChatMessage msg in Model.Messages)
+    {
+        <p>
+            <span class="msg-time">@msg.Date.ToString("dd.MM.yyyy HH:mm:ss")</span><br />
+            @if (msg.User != null)
+            {
+                <strong class="msg-author">@(msg.User.Name + ":")</strong>
+                <span class="msg-text">@msg.Text</span>
+            }
+            else
+            {
+                <span class="serverMes">@msg.Text</span>
+            }
+        </p>
+    }
+</div>

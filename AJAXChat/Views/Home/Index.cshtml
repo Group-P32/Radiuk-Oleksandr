@@ -1,0 +1,42 @@
+﻿@model AJAXChat.Models.ChatModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Чат — Продуктовий магазин | Радюк О. П-32</title>
+    <link href="~/Content/Site.css" rel="stylesheet" />
+</head>
+<body>
+    <div id="topBar">
+        <div id="Username"></div>
+        <div id="LastRefresh"></div>
+    </div>
+
+    <div id="container">
+        <div id="loginBlock">
+            <h2>🛒 Чат продуктового магазину</h2>
+            <p>Введіть своє ім'я, щоб увійти в чат:</p>
+            <input type="text" id="txtUserName" placeholder="Ваше ім'я..." maxlength="30" />
+            <button id="btnLogin">Увійти</button>
+        </div>
+    </div>
+
+    <div id="Error"></div>
+
+    @Ajax.ActionLink("Login", "Index", new { user = "" },
+        new AjaxOptions
+        {
+            UpdateTargetId = "container",
+            OnFailure = "LoginOnFailure",
+            OnSuccess = "LoginOnSuccess"
+        },
+        new { @id = "LoginButton", @style = "visibility:hidden;" })
+
+    <script src="~/Scripts/jquery-3.3.1.min.js"></script>
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script src="~/Scripts/chat.js"></script>
+</body>
+</html>
